@@ -31,4 +31,10 @@ const UserSchema = Schema({
 	}
 })
 
+// Para modificar parametros visibles!
+UserSchema.methods.toJSON = function(){
+	const { __v, password, _id, ...restUser} = this.toObject()
+	restUser.uid = _id
+	return restUser
+}
 module.exports = model("User", UserSchema)

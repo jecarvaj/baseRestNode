@@ -4,12 +4,14 @@ const {dbConnection} = require("../db/config")
 
 // Route files
 const usersRoutes = require("../routes/users.routes")
+const authRoutes = require("../routes/auth.routes")
 
 class Server {
 	constructor() {
 		this.app = express()
 		this.port = process.env.PORT
     this.usersPath = "/api/users"
+    this.authPath = "/api/auth"
 		// Connect DB
 		this.connectDb()
 		//Middlewares
@@ -35,6 +37,7 @@ class Server {
 	}
 
 	routes() {
+    this.app.use(this.authPath, authRoutes)
     this.app.use(this.usersPath, usersRoutes)
   }
 
