@@ -5,13 +5,21 @@ const {dbConnection} = require("../db/config")
 // Route files
 const usersRoutes = require("../routes/users.routes")
 const authRoutes = require("../routes/auth.routes")
+const categoriesRoutes = require("../routes/categories.routes")
+const productsRoutes = require("../routes/products.routes")
+const searchRoutes = require("../routes/search.routes")
 
 class Server {
 	constructor() {
 		this.app = express()
 		this.port = process.env.PORT
-    this.usersPath = "/api/users"
-    this.authPath = "/api/auth"
+		this.paths = {
+			auth: 			"/api/auth",
+			categories: "/api/categories",
+			products:   "/api/products",
+			users: 			"/api/users",
+			search: 		"/api/search"
+		}
 		// Connect DB
 		this.connectDb()
 		//Middlewares
@@ -37,8 +45,11 @@ class Server {
 	}
 
 	routes() {
-    this.app.use(this.authPath, authRoutes)
-    this.app.use(this.usersPath, usersRoutes)
+    this.app.use(this.paths.auth, authRoutes)
+    this.app.use(this.paths.categories, categoriesRoutes)
+    this.app.use(this.paths.users, usersRoutes)
+    this.app.use(this.paths.products, productsRoutes)
+    this.app.use(this.paths.search, searchRoutes)
   }
 
 	listen() {
