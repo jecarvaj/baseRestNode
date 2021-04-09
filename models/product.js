@@ -14,22 +14,25 @@ const ProductSchema = Schema({
 		ref: "User",
 		required: true
 	},
-  price: {
-    type: Number,
-    default: 0
-  },
-  category: {
-    type: Schema.Types.ObjectId,
-    ref: 'Category',
-    required: true
-  },
-  available: {
-    type: Boolean,
-    default: true
-  },
-  desc: {
-    type: String,
-  }
+	price: {
+		type: Number,
+		default: 0
+	},
+	category: {
+		type: Schema.Types.ObjectId,
+		ref: "Category",
+		required: true
+	},
+	available: {
+		type: Boolean,
+		default: true
+	},
+	desc: {
+		type: String
+	},
+	img: {
+		type: String
+	}
 })
 
 // Para modificar parametros visibles!
